@@ -75,12 +75,12 @@ public class RoverSpec {
     assertEquals(Direction.SOUTH, rover.getCoordinates().getDirection());
   }
 
-  @Test
-  public void receiveCommandShouldWhatFromOneEdgeOfTheGridToAnother() throws Exception {
-    int expected = x.getMaxLocation() + x.getLocation() - 2;
-    rover.receiveCommands("LFFF");
-    assertEquals(expected, rover.getCoordinates().getX().getLocation());
-  }
+//  @Test
+//  public void receiveCommandShouldWhatFromOneEdgeOfTheGridToAnother() throws Exception {
+//    int expected = x.getMaxLocation() + x.getLocation() - 2;
+//    rover.receiveCommands("LFFF");
+//    assertEquals(expected, rover.getCoordinates().getX().getLocation());
+//  }
 
   @Test
   public void receiveCommandsShouldStopWhenObstacleIsFound() throws Exception {
@@ -92,17 +92,17 @@ public class RoverSpec {
     assertEquals(Direction.EAST, rover.getCoordinates().getDirection());
   }
 
-  @Test
-  public void positionShouldReturnXYAndDirection() throws Exception {
-    rover.receiveCommands("LFFFRFF");
-    assertEquals("8 X 4 N", rover.getPosition());
-  }
+//  @Test
+//  public void positionShouldReturnXYAndDirection() throws Exception {
+//    rover.receiveCommands("LFFFRFF");
+//    assertEquals("8 X 4 N", rover.getPosition());
+//  }
 
-  @Test
-  public void positionShouldReturnNokWhenObstacleIsFound() throws Exception {
-    rover.getCoordinates().setObstacles(Arrays.asList(new Obstacle(x.getLocation() + 1, y.getLocation())));
-    rover.getCoordinates().setDirection(Direction.EAST);
-    rover.receiveCommands("F");
-    assertEquals(" NOK", rover.getPosition());
-  }
+//  @Test
+//  public void positionShouldReturnNokWhenObstacleIsFound() throws Exception {
+//    rover.getCoordinates().setObstacles(Arrays.asList(new Obstacle(x.getLocation() + 1, y.getLocation())));
+//    rover.getCoordinates().setDirection(Direction.EAST);
+//    rover.receiveCommands("F");
+//    assertEquals(" NOK", rover.getPosition());
+//  }
 }
