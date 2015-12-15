@@ -6,10 +6,12 @@ public class TelemetryDiagnosticControls
 
   private final TelemetryClient telemetryClient;
   private String diagnosticInfo = "";
+  private int retryLeft = 0;
 
-  public TelemetryDiagnosticControls()
+  public TelemetryDiagnosticControls(TelemetryClient telemetryClient, int retryLeft)
   {
-    telemetryClient = new TelemetryClient();
+    this.telemetryClient = telemetryClient;
+    this.retryLeft = retryLeft;
   }
 
   public String getDiagnosticInfo(){
@@ -26,7 +28,6 @@ public class TelemetryDiagnosticControls
 
     telemetryClient.disconnect();
 
-    int retryLeft = 3;
     while (telemetryClient.getOnlineStatus() == false && retryLeft > 0)
     {
       telemetryClient.connect(DiagnosticChannelConnectionString);
