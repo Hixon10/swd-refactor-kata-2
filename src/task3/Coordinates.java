@@ -38,6 +38,19 @@ public class Coordinates {
     return false;
   }
 
+  public boolean hasObstacleInFront() {
+    if (move(1)) {
+      move(-1);
+      return false;
+    }
+
+    return true;
+  }
+
+  public Boolean canMove(int x, int y) {
+    return !hasObstacle(this.x.getLocation() + x, this.y.getLocation() + y);
+  }
+
   public Coordinates(Point xValue,
                      Point yValue,
                      Direction directionValue,
@@ -50,7 +63,8 @@ public class Coordinates {
 
   @Override
   public String toString() {
-    throw new UnsupportedOperationException();
+    return String.format("%d X %d %s", getX().getLocation(), getY().getLocation(),
+            getDirection().toString().charAt(0));
   }
 
   public void setY(Point y) {
@@ -59,5 +73,52 @@ public class Coordinates {
 
   public void setX(Point x) {
     this.x = x;
+  }
+
+  public boolean move(int delta) {
+    if (directionValue == Direction.EAST) {
+      return move(delta, 0);
+    } else if (directionValue == Direction.NORTH) {
+      return move(0, delta);
+    } else if (directionValue == Direction.SOUTH) {
+      return move(0, -delta);
+    } else if (directionValue == Direction.WEST) {
+      return move(-delta, 0);
+    }
+
+    return false;
+  }
+
+  public void turnLeft() {
+    if (directionValue == Direction.EAST) {
+      directionValue = Direction.NORTH;
+    } else if (directionValue == Direction.NORTH) {
+      directionValue = Direction.WEST;
+    } else if (directionValue == Direction.SOUTH) {
+      directionValue = Direction.EAST;
+    } else if (directionValue == Direction.WEST) {
+      directionValue = Direction.SOUTH;
+    }
+  }
+
+  public void turnRight() {
+    if (directionValue == Direction.EAST) {
+      directionValue = Direction.SOUTH;
+    } else if (directionValue == Direction.NORTH) {
+      directionValue = Direction.EAST;
+    } else if (directionValue == Direction.SOUTH) {
+      directionValue = Direction.WEST;
+    } else if (directionValue == Direction.WEST) {
+      directionValue = Direction.NORTH;
+    }
+  }
+
+  private boolean move(int xValue, int yValue) {
+    if (!hasObstacle(this.x.getLocation() + xValue, this.y.getLocation() + yValue)) {
+      x.setLocation(x.getLocation() + xValue);
+      y.setLocation(y.getLocation() + yValue);
+      return true;
+    }
+    return false;
   }
 }
